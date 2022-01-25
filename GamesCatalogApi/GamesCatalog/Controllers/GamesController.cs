@@ -19,7 +19,6 @@ namespace GamesCatalog.Controllers
         {
             _gameService = gameServices;
         }
-        
 
         [HttpPost("GamePost")]
         public ActionResult GamePost([FromBody] Game game)
@@ -35,5 +34,36 @@ namespace GamesCatalog.Controllers
             }
             
         }
+
+        [HttpGet("GameList")]
+        public ActionResult GetGameList()
+        {
+            try
+            {
+                return Ok(_gameService.GetGameList());
+            }
+            catch (Exception exception)
+            {
+
+                return BadRequest(exception.Message);
+            }
+
+        }
+
+
+        [HttpGet]
+        [Route("GameList/{id}")]
+        public ActionResult<GameDetail> GetGameDetailById(int id)
+        {
+            GameDetail gameDetail = _gameService.GetGameDetailById(id);
+            if (gameDetail.Id == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(gameDetail);
+
+        }
+
     }
 }

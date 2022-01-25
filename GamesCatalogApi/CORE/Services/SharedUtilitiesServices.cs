@@ -53,7 +53,6 @@ namespace CORE.Services
         { 
             
             List<CatalogItem> catalogList = new List<CatalogItem>();
-            //Se abre conexión utilizando el connectionString y se procesa la solicitud 
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("gamesCatalogConection")))
             {
                 SqlCommand cmd = new SqlCommand($"{storedProcedure}", con);
@@ -64,6 +63,7 @@ namespace CORE.Services
                 {
                     CatalogItem catalog = new CatalogItem
                     {
+                        Id = Convert.ToInt32(datareader["Id"]),
                         Name = datareader[$"{catalogItem.Name}"].ToString(),
                         Description = datareader[$"{catalogItem.Description}"].ToString()
                     };
