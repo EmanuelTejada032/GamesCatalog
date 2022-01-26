@@ -1,1 +1,14 @@
-<p>game-list works!</p>
+<div class="row mt-5 mb-5">
+    <div class="col" *ngFor="let game of gameList">
+        <div class="card mb-5" style="width: 18rem;">
+            <img src="https://picsum.photos/150/100" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{game.title}}</h5>
+                <p class="card-text text-muted">By: {{game.studio}} <br>Released: {{game.releaseDate}}</p>
+                </div>
+                <div class="card-body">
+                    <button href="#" class="btn btn-primary">Detail</button>
+                </div>
+        </div>
+    </div>
+</div>

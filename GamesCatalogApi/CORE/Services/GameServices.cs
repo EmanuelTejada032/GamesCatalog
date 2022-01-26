@@ -162,7 +162,34 @@ namespace CORE.Services
         }
 
 
+        public List<GameCard> GetTopGames()
+        {
+            List<GameCard> topGamesList = new List<GameCard>();
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("gamesCatalogConection")))
+            {
+                SqlCommand command = new SqlCommand("Proc_Games_Trans_GetList", connection);
+                command.CommandType = CommandType.StoredProcedure;
 
+                connection.Open();
+                SqlDataReader datareader = command.ExecuteReader();
+                while (datareader.Read())
+                {
+                    GameCard game = new GameCard
+                    {
+                        Id = Convert.ToInt32(datareader["Id"]),
+                        Title = datareader["Title"].ToString(),
+                        Price = Convert.ToInt32(datareader["Price"]),
+                        ReleaseDate = datareader["Release_Date"].ToString(),
+                        Studio = datareader["Studio_Name"].ToString()
+                    };
+                    topGamesList.Add(game);
+                }
+                connection.Close();
+
+
+            }
+            return topGamesList;
+        }
 
         private void AddGameGenres(int gameId, List<int> gameGenresIdList)
         {

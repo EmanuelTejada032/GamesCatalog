@@ -12,5 +12,6 @@ namespace CORE.Interfaces
         public int RegisterGame(Game newGameData);
         public List<GameCard> GetGameList();
         public GameDetail GetGameDetailById(int id);
+        public List<GameCard> GetTopGames();
     }
 }

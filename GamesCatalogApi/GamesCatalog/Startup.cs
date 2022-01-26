@@ -33,8 +33,11 @@ namespace GamesCatalog
 
             services.AddTransient<ISharedUtilitiesServices, SharedUtilitiesServices>();
             services.AddTransient<IGameServices, GameServices>();
-            
 
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -50,6 +53,7 @@ namespace GamesCatalog
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GamesCatalog v1"));
+                app.UseCors(options => options.AllowAnyOrigin());
             }
 
             app.UseHttpsRedirection();

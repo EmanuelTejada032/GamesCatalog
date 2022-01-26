@@ -6,6 +6,7 @@ import { GameListComponent } from './pages/game-list/game-list.component';
 import { GameDetailsComponent } from './pages/game-details/game-details.component';
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { CarrouselComponent } from './components/carrousel/carrousel.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { CarrouselComponent } from './components/carrousel/carrousel.component';
     GameListComponent,
     GameDetailsComponent,
     HomepageComponent,
-    CarrouselComponent
+    CarrouselComponent,
+    SearchBarComponent
   ],
   imports: [
     CommonModule,

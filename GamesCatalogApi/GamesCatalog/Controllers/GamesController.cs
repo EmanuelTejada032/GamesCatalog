@@ -65,5 +65,20 @@ namespace GamesCatalog.Controllers
 
         }
 
+        [HttpGet("GetTopGames")]
+        public ActionResult GetTopGames()
+        {
+            try
+            {
+                return Ok(_gameService.GetTopGames());
+            }
+            catch (Exception exception)
+            {
+
+                return BadRequest(exception.Message);
+            }
+
+        }
+
     }
 }
