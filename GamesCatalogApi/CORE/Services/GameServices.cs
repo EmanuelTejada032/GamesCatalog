@@ -167,7 +167,7 @@ namespace CORE.Services
             List<GameCard> topGamesList = new List<GameCard>();
             using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("gamesCatalogConection")))
             {
-                SqlCommand command = new SqlCommand("Proc_Games_Trans_GetList", connection);
+                SqlCommand command = new SqlCommand("Proc_Games_Trans_GetTopGames", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
                 connection.Open();
@@ -176,7 +176,7 @@ namespace CORE.Services
                 {
                     GameCard game = new GameCard
                     {
-                        Id = Convert.ToInt32(datareader["Id"]),
+                        Id = Convert.ToInt32(datareader["Game_Id"]),
                         Title = datareader["Title"].ToString(),
                         Price = Convert.ToInt32(datareader["Price"]),
                         ReleaseDate = datareader["Release_Date"].ToString(),

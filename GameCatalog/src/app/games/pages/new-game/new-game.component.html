@@ -1,0 +1,95 @@
+
+
+<div class="row mt-5">
+    <div class="col-6 mx-5">
+        <form (ngSubmit)="sendGameData()" [formGroup]="newGameForm">
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Title</label>
+                <div class="col-sm-9">
+                    <input type="text"
+                           class="form-control mb-2"
+                           placeholder="Game title"
+                           formControlName="title"
+                           autocomplete="off"
+                           >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Description</label>
+                <div class="col-sm-9">
+                    <textarea
+                           class="form-control mb-2"
+                           placeholder="Game description"
+                           formControlName="description"
+                           ></textarea>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">price</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control mb-2"
+                           placeholder="Game price"
+                           formControlName="price"
+                           >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">studio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control mb-2"
+                           placeholder="Game studio"
+                           formControlName="studio"
+                           >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Release date</label>
+                <div class="col-sm-9">
+                    <input type="date"
+                           class="form-control mb-2"
+                           placeholder="Game releasedate"
+                           formControlName="releasedate"
+                           >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Genres</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control mb-2"
+                           placeholder="Game genres"
+                           formControlName="genres"
+                           >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Languages</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control mb-2"
+                           placeholder="Game languages"
+                           formControlName="languages"
+                           >
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="" class="col-sm-3 col-form-label">Tags</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control mb-2"
+                           placeholder="Game tags"
+                           formControlName="tags"
+                           >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mb-3">
+                    <button type="submit" class="btn btn-info">Create game</button>
+                </div>
+            </div>
+        </form>
+       
+    </div>
+</div>

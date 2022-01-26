@@ -52,7 +52,7 @@ namespace GamesCatalog.Controllers
 
 
         [HttpGet]
-        [Route("GameList/{id}")]
+        [Route("{id}")]
         public ActionResult<GameDetail> GetGameDetailById(int id)
         {
             GameDetail gameDetail = _gameService.GetGameDetailById(id);
@@ -66,7 +66,7 @@ namespace GamesCatalog.Controllers
         }
 
         [HttpGet("GetTopGames")]
-        public ActionResult GetTopGames()
+        public ActionResult<List<GameCard>> GetTopGames()
         {
             try
             {

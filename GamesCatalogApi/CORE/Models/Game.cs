@@ -11,7 +11,7 @@ namespace CORE.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public float Price { get; set; }
-        public int? User { get; set; }
+        //public int? User { get; set; }
         public int? Studio { get; set; }
         public DateTime ReleaseDate { get; set; }
 

@@ -19,8 +19,8 @@ export class HeaderComponent implements OnInit {
       text: 'Home'
     },
     {
-      path: 'games/gamelist',
-      text: 'Games List'
+      path: 'games/newGame',
+      text: 'New Game'
     }
   ]
 
