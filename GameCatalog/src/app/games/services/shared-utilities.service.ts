@@ -12,13 +12,13 @@ export class SharedUtilitiesService {
 
 
   GetGameGenresCatalog(){
-    this.http.get<CatalogItem>(APIURL.SharedUtilities.gamesGenresCata);
+    return this.http.get<CatalogItem[]>(APIURL.SharedUtilities.gamesGenresCata);
   }
   GetGameTagsCatalog(){
-    this.http.get<CatalogItem>(APIURL.SharedUtilities.gamesTagsCata);
+    return this.http.get<CatalogItem[]>(APIURL.SharedUtilities.gamesTagsCata);
   }
   GetLanguagesCatalog(){
-    this.http.get<CatalogItem>(APIURL.SharedUtilities.languagesCata);
+    return this.http.get<CatalogItem[]>(APIURL.SharedUtilities.languagesCata);
   }
   
 

@@ -37,6 +37,7 @@ namespace CORE.Services
                     {
                         Id = Convert.ToInt32(datareader["Id"]),
                         Title = datareader["Title"].ToString(),
+                        Image = datareader["Image"].ToString(),
                         Price = Convert.ToInt32(datareader["Price"]),
                         ReleaseDate = datareader["Release_Date"].ToString(),
                         Studio = datareader["Studio_Name"].ToString(),
@@ -70,6 +71,7 @@ namespace CORE.Services
                     {
                         Id = gameId,
                         Title = datareader["Title"].ToString(),
+                        Image = datareader["Image"].ToString(),
                         Description = datareader["Description"].ToString(),
                         Price = Convert.ToInt32(datareader["Price"]),
                         StudioName = datareader["Studio_Name"].ToString(),
@@ -142,6 +144,7 @@ namespace CORE.Services
                 command.CommandType = CommandType.StoredProcedure;
 
                 command.Parameters.AddWithValue("@Title", newGameData.Title);
+                command.Parameters.AddWithValue("@Image", newGameData.Image);
                 command.Parameters.AddWithValue("@Description", newGameData.Description);
                 command.Parameters.AddWithValue("@Price", newGameData.Price);
                 command.Parameters.AddWithValue("@Studio_Id", newGameData.Studio);
@@ -178,6 +181,7 @@ namespace CORE.Services
                     {
                         Id = Convert.ToInt32(datareader["Game_Id"]),
                         Title = datareader["Title"].ToString(),
+                        Image = datareader["Image"].ToString(),
                         Price = Convert.ToInt32(datareader["Price"]),
                         ReleaseDate = datareader["Release_Date"].ToString(),
                         Studio = datareader["Studio_Name"].ToString()

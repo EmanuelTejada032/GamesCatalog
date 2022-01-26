@@ -1,7 +1,7 @@
 <div class="row mt-5 mb-5">
     <div class="col" *ngFor="let game of gameList">
         <div class="card mb-5" style="width: 18rem;">
-            <img src="https://picsum.photos/150/100" class="card-img-top" alt="...">
+            <img src="{{game.image }}" class="card-img-top" width="100px" height="150px" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{game.title}}</h5>
                 <p class="card-text text-muted">By: {{game.studio}} <br>Released: {{game.releaseDate}}</p>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http"
-import { GameCard } from '../interfaces/GamesInterfaces';
+import { GameCard, GamePost } from '../interfaces/GamesInterfaces';
 import { APIURL } from '../../shared/apiUrls';
 
 @Injectable({
@@ -14,6 +14,9 @@ export class GamesService {
     return this.http.get<GameCard[]>(APIURL.Games.gameList);
   }
 
+  gamePost(game: GamePost){
+    return this.http.post<GameCard[]>(APIURL.Games.gamePost, game);
+  }
 
 
 

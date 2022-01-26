@@ -2,6 +2,7 @@
 export interface GameCard {
      id:            number;
      title:         string;
+     image:         string;
      price:         number;
      releaseDate:   string;
      studio:        string;
@@ -9,6 +10,7 @@ export interface GameCard {
 
 export interface GamePost {
      title:              string;
+     image:              string;
      description:        string;
      price:              number;
      studio:             number;
@@ -24,4 +26,10 @@ export interface CatalogItem{
      id: number;
      name: string;
      description: string;
+} 
+
+export interface CatalogItemCheckOption{
+     id: number;
+     name: string;
+     selected: boolean;
 } 
