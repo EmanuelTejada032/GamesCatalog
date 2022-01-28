@@ -36,11 +36,11 @@ namespace GamesCatalog.Controllers
         }
 
         [HttpGet("GameList")]
-        public ActionResult GetGameList()
+        public ActionResult GetGameList([FromQuery]Pagination paginationData)
         {
             try
             {
-                return Ok(_gameService.GetGameList());
+                return Ok(_gameService.GetGameList(paginationData));
             }
             catch (Exception exception)
             {

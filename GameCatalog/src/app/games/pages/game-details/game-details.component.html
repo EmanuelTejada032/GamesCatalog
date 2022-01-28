@@ -1,1 +1,32 @@
-<p>game-details works!</p>
+<div class="row mt-5 ms-5">
+    <div class="col-6">
+        <img [src]="game?.image" class="img-fluid" alt="...">
+    </div>
+    <div class="col-6">
+            <h1>{{game?.title}}</h1>
+            <p>{{game?.description}}</p>
+            <p> <b>RELEASE DATE:</b> {{game?.releaseDate}}</p>
+            <P> <b>DEVELOPER:</b> {{game?.studioName}}</P>
+            <P> <b>PUBLISHER:</b> {{game?.studioName}}</P>
+            <p class="m-0"><b>TAGS:</b> </p>
+            <p *ngFor="let tag of game?.tags" type="button" class="btn btn-primary btn-sm me-1" aria-pressed="false">{{tag}}</p>
+            <p class="m-0"><b>GENRES:</b> </p>
+            <p *ngFor="let genre of game?.genres" type="button" class="btn btn-primary btn-sm me-1" aria-pressed="true">{{genre}}</p>
+            <p class="m-0"><b>LANGUAGES:</b> </p>
+            <p *ngFor="let language of game?.languages" type="button" class="btn btn-primary btn-sm me-1" aria-pressed="true">{{language}}</p>
+    </div>
+</div>
+
+
+<div class="row mx-5 mt-2">
+    <div class="col-2">
+        <img [src]="game?.image" class="img-fluid" alt="...">
+    </div>
+    <div class="col-2">
+        <img [src]="game?.image" class="img-fluid" alt="...">
+    </div>
+    <div class="col-2">
+        <img [src]="game?.image" class="img-fluid" alt="...">
+    </div>
+</div>
+

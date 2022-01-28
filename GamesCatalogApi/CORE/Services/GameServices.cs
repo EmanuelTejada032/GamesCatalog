@@ -20,7 +20,7 @@ namespace CORE.Services
             _configuration = configuration;
         }
 
-        public List<GameCard> GetGameList()
+        public List<GameCard> GetGameList(Pagination paginationData)
         {
             List<GameCard> gamesList = new List<GameCard>();
 
@@ -28,6 +28,9 @@ namespace CORE.Services
             {
                 SqlCommand command = new SqlCommand("Proc_Games_Trans_GetList", connection);
                 command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@Page_Index", paginationData.PageIndex);
+                command.Parameters.AddWithValue("@Page_Size", paginationData.PageSize);
+                command.Parameters.AddWithValue("@Search_Term", paginationData.SearchTerm);
 
                 connection.Open();
                 SqlDataReader datareader = command.ExecuteReader();
@@ -41,7 +44,13 @@ namespace CORE.Services
                         Price = Convert.ToInt32(datareader["Price"]),
                         ReleaseDate = datareader["Release_Date"].ToString(),
                         Studio = datareader["Studio_Name"].ToString(),
+                        StartLine = Convert.ToInt32(datareader["Start_Line"]),
+                        LastLine = Convert.ToInt32(datareader["Last_Line"]),
+                        TotalItems = Convert.ToInt32(datareader["Total_Rows"]),
                     };
+
+                    
+
                     gamesList.Add(game);
                 }
                 connection.Close();

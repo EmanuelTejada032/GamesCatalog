@@ -7,8 +7,6 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a *ngFor="let navItem of navigationItems" class="nav-link" href="#"  [routerLink]="[navItem.path]" routerLinkActive="active">{{navItem.text}}</a>
-          <!-- <a class="nav-link active" aria-current="page" href="#">Home</a>
-          <a class="nav-link" href="#">Game List</a> -->
         </div>
       </div>
     </div>

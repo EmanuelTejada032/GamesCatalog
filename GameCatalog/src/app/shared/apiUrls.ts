@@ -7,9 +7,9 @@ let Api = environment.api;
 export let APIURL = {
 
   Games:{
-    gameList: Api+'Games/GameList',
+    gameList: Api+"Games/GameList",
     gamePost: Api+"Games/GamePost",
-    gameById: Api+"Games/:id"
+    gameById: Api+"Games/"
   },
   SharedUtilities:{
     gamesGenresCata: Api+'SharedUtilities/GetGenresCata',

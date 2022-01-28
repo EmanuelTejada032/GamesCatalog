@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { GamesRoutingModule } from './games-routing.module';
 import { GameListComponent } from './pages/game-list/game-list.component';
@@ -7,8 +10,9 @@ import { GameDetailsComponent } from './pages/game-details/game-details.componen
 import { HomepageComponent } from './pages/homepage/homepage.component';
 import { CarrouselComponent } from './components/carrousel/carrousel.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { NewGameComponent } from './pages/new-game/new-game.component';
+import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -22,8 +26,11 @@ import { NewGameComponent } from './pages/new-game/new-game.component';
   ],
   imports: [
     CommonModule,
+    RouterModule,
+    FormsModule,
     GamesRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ]
 })
 export class GamesModule { }

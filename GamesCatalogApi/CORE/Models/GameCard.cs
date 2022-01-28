@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CORE.Models
 {
-    public class GameCard
+    public class GameCard: PaginationListConfig
     {
         public int Id { get; set; }
         public string Title { get; set; }

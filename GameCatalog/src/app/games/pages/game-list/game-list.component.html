@@ -1,5 +1,14 @@
+
+<app-search-bar (onSearch)="search($event)"></app-search-bar>
+
+<div class="alert alert-warning mt-5" role="alert" *ngIf="gameList.length < 1">
+    No result for '{{this.paginationData.searchTerm}}'
+</div>
 <div class="row mt-5 mb-5">
-    <div class="col" *ngFor="let game of gameList">
+    <div class="col" *ngFor="let game of gameList  | paginate: { id: 'gamesPaginantion',
+                                                                 itemsPerPage: paginationData.itemsPerPage,
+                                                                 currentPage: paginationData.currentPage,
+                                                                 totalItems: paginationData.totalItems }">
         <div class="card mb-5" style="width: 18rem;">
             <img src="{{game.image }}" class="card-img-top" width="100px" height="150px" alt="...">
             <div class="card-body">
@@ -7,8 +16,15 @@
                 <p class="card-text text-muted">By: {{game.studio}} <br>Released: {{game.releaseDate}}</p>
                 </div>
                 <div class="card-body">
-                    <button href="#" class="btn btn-primary">Detail</button>
+                    <a href="#" class="btn btn-primary" [routerLink]="['/games/29']">{{game.id}}</a>
                 </div>
         </div>
     </div>
 </div>
+<pagination-controls  id="gamesPaginantion"
+                      (pageChange)="pageChanged($event)"
+                      previousLabel="Prev"
+                      nextLabel="Next"
+                      [responsive]="true"
+                      >
+</pagination-controls>
