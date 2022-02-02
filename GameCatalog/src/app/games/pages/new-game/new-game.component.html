@@ -9,11 +9,14 @@
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="" class="col-sm-3 col-form-label">Image</label>
+                <label for="formFileMultiple" class="col-sm-3 col-form-label">Images</label>
                 <div class="col-sm-9">
+                    <input class="form-control" type="file" id="formFileMultiple" formControlName="images" multiple>
+                </div>
+                <!-- <div class="col-sm-9">
                     <input type="text" class="form-control mb-2" placeholder="Game image" formControlName="image"
                         autocomplete="off">
-                </div>
+                </div> -->
             </div>
             <div class="mb-3 row">
                 <label for="" class="col-sm-3 col-form-label">Description</label>
@@ -40,8 +43,10 @@
                 <label for="" class="col-sm-3 col-form-label" for="flexCheckDefault">Genres</label>
                 <div class="col-sm-9">
                     <div *ngFor="let genre of genresCatalog; let i = index" class="m-2 d-inline-block">
-                        <input type="checkbox" class="btn-check" id="btn-check-outlinedgenre{{i}}" autocomplete="off"  (change)="onGenresCheckBoxChange($event)" [value]="genre.id"> 
-                        <label class="btn btn-outline-primary" for="btn-check-outlinedgenre{{i}}">{{ genre.name}}</label><br>
+                        <input type="checkbox" class="btn-check" id="btn-check-outlinedgenre{{i}}" autocomplete="off"
+                            (change)="onGenresCheckBoxChange($event)" [value]="genre.id">
+                        <label class="btn btn-outline-primary" for="btn-check-outlinedgenre{{i}}">{{
+                            genre.name}}</label><br>
                     </div>
                 </div>
             </div>
@@ -50,8 +55,10 @@
                 <label for="" class="col-sm-3 col-form-label">Languages</label>
                 <div class="col-sm-9">
                     <div *ngFor="let language of languagesCatalog; let i = index" class="m-2 d-inline-block">
-                        <input type="checkbox" class="btn-check" id="btn-check-outlinedlanguage{{i}}" autocomplete="off" (change)="onLanguagesCheckBoxChange($event)" [value]="language.id">
-                        <label class="btn btn-outline-success" for="btn-check-outlinedlanguage{{i}}">{{ language.name}}</label><br>
+                        <input type="checkbox" class="btn-check" id="btn-check-outlinedlanguage{{i}}" autocomplete="off"
+                            (change)="onLanguagesCheckBoxChange($event)" [value]="language.id">
+                        <label class="btn btn-outline-success" for="btn-check-outlinedlanguage{{i}}">{{
+                            language.name}}</label><br>
                     </div>
                 </div>
             </div>
@@ -60,7 +67,8 @@
                 <label for="" class="col-sm-3 col-form-label">Tags</label>
                 <div class="col-sm-9">
                     <div *ngFor="let tag of tagsCatalog; let i = index" class="m-2 d-inline-block">
-                        <input type="checkbox" class="btn-check" id="btn-check-outlinedtag{{i}}" autocomplete="off"  (change)="onTagsCheckboxChange($event)" [value]="tag.id">
+                        <input type="checkbox" class="btn-check" id="btn-check-outlinedtag{{i}}" autocomplete="off"
+                            (change)="onTagsCheckboxChange($event)" [value]="tag.id">
                         <label class="btn btn-outline-danger" for="btn-check-outlinedtag{{i}}">{{ tag.name}}</label><br>
                     </div>
                 </div>

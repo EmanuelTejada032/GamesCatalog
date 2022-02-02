@@ -24,7 +24,7 @@ export class NewGameComponent implements OnInit {
   newGameForm: FormGroup = this.formBuilder.group({
      title: ["", Validators.required],
      description: ["", Validators.required],
-     image: [, Validators.required],
+     images: [, Validators.required],
      price:  [1.99,[ Validators.required, Validators.min(0)]],
      releasedate: ['2022-01-11',[ Validators.required, Validators.min(0)]],
      genres: [, Validators.required],
@@ -44,16 +44,17 @@ export class NewGameComponent implements OnInit {
 
 
   sendGameData(){
+    console.log(this.newGameForm.controls['images'].value);
+    
+    // const game: GamePost = this.formatFormData();
 
-    const game: GamePost = this.formatFormData();
-
-    this.resetNewGameForm();
-    this.gamesServices.gamePost(game)
-    .subscribe( postResponse => {
-      console.log("post response", postResponse);
-      this.resetNewGameForm();
-      this.router.navigateByUrl('/homepage');
-    })
+    // this.resetNewGameForm();
+    // this.gamesServices.gamePost(game)
+    // .subscribe( postResponse => {
+    //   console.log("post response", postResponse);
+    //   this.resetNewGameForm();
+    //   this.router.navigateByUrl('/homepage');
+    // })
   }
 
   onGenresCheckBoxChange(event: any){
@@ -92,12 +93,7 @@ export class NewGameComponent implements OnInit {
     this.selectedLanguages = [];
   }
 
-  loadCatalogs(){
-    this.GetGameGenresCatalog();
-    this.GetGameTagsCatalog();
-    this.GetLanguageCatalog();
-  }
-
+  
   formatFormData(){
     return {
       ...this.newGameForm.value,
@@ -107,6 +103,13 @@ export class NewGameComponent implements OnInit {
       languages: this.selectedLanguages ,
       tags: this.selectedTags 
     }
+  }
+
+  
+  loadCatalogs(){
+    this.GetGameGenresCatalog();
+    this.GetGameTagsCatalog();
+    this.GetLanguageCatalog();
   }
 
   GetGameGenresCatalog(){

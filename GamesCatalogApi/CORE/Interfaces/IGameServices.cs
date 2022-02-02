@@ -1,4 +1,6 @@
 ﻿using CORE.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +15,7 @@ namespace CORE.Interfaces
         public List<GameCard> GetGameList(Pagination paginationData);
         public GameDetail GetGameDetailById(int id);
         public List<GameCard> GetTopGames();
+        public Task<string> UploadFrontPageImage(PostGameImage postImageData , string localPath);
+
     }
 }

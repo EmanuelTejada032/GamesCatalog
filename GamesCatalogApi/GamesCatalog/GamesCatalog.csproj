@@ -12,4 +12,8 @@
     <ProjectReference Include="..\CORE\CORE.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\GameImages\" />
+  </ItemGroup>
+
 </Project>

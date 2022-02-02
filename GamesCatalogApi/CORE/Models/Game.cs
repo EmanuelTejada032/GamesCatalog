@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,10 @@ namespace CORE.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Image { get; set; }
+
+        public IFormFile Image { get; set; }
+
+        //public List<IFormFile> Images { get; set; }
         public float Price { get; set; }
         //public int? User { get; set; }
         public int? Studio { get; set; }

@@ -57,7 +57,7 @@ namespace GamesCatalog
                     .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader());
-                }
+            }
 
             app.UseHttpsRedirection();
 

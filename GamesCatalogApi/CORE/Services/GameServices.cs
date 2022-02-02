@@ -1,10 +1,14 @@
 ﻿using CORE.Interfaces;
 using CORE.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +17,10 @@ namespace CORE.Services
 {
     public class GameServices: IGameServices
     {
+
         IConfiguration _configuration;
+
+        Random random = new Random();
 
         public GameServices(IConfiguration configuration)
         {
@@ -40,7 +47,8 @@ namespace CORE.Services
                     {
                         Id = Convert.ToInt32(datareader["Id"]),
                         Title = datareader["Title"].ToString(),
-                        Image = datareader["Image"].ToString(),
+                        //Image = datareader["Image"].ToString(),
+                        Image = "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/es_LA/games/switch/e/enter-the-gungeon-switch/hero?v=2021120608",
                         Price = Convert.ToInt32(datareader["Price"]),
                         ReleaseDate = datareader["Release_Date"].ToString(),
                         Studio = datareader["Studio_Name"].ToString(),
@@ -80,7 +88,8 @@ namespace CORE.Services
                     {
                         Id = gameId,
                         Title = datareader["Title"].ToString(),
-                        Image = datareader["Image"].ToString(),
+                        Image = "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/es_LA/games/switch/e/enter-the-gungeon-switch/hero?v=2021120608",
+                        ////Image = datareader["Image"].ToString(),
                         Description = datareader["Description"].ToString(),
                         Price = Convert.ToInt32(datareader["Price"]),
                         StudioName = datareader["Studio_Name"].ToString(),
@@ -153,7 +162,6 @@ namespace CORE.Services
                 command.CommandType = CommandType.StoredProcedure;
 
                 command.Parameters.AddWithValue("@Title", newGameData.Title);
-                command.Parameters.AddWithValue("@Image", newGameData.Image);
                 command.Parameters.AddWithValue("@Description", newGameData.Description);
                 command.Parameters.AddWithValue("@Price", newGameData.Price);
                 command.Parameters.AddWithValue("@Studio_Id", newGameData.Studio);
@@ -167,9 +175,9 @@ namespace CORE.Services
                 this.AddGameGenres(gameId, newGameData.Genres);
                 this.AddGameTags(gameId, newGameData.Tags);
                 this.AddGameLanguages( gameId,newGameData.Languages );
-               
 
             }
+
             return gameId;
         }
 
@@ -249,6 +257,81 @@ namespace CORE.Services
             }
         }
 
+        public async Task<string> UploadFrontPageImage(PostGameImage postImageData, string localPath)
+        {
+            
+                string fileName = postImageData.Image.FileName.Split('.')[0];
+                string fileExtension = postImageData.Image.FileName.Split('.')[postImageData.Image.FileName.Split('.').Length -1];
+                string uniqueName = fileName + "-" + random.Next(1000000,10000000)+ $".{fileExtension}";
+                string fileSize = (postImageData.Image.Length / 1000000).ToString() + "mb";
+
+                var folderPathServer = Path.Combine(GetFilePath("Game_Images"), uniqueName);
+                string localFolderPath = Path.Combine(Path.Combine(localPath, "Files/GameImages"), uniqueName);
+
+                using (var fileStream = new FileStream(localFolderPath, mode: FileMode.Create))
+                {
+                    if (localFolderPath != null)
+                    {
+                        await postImageData.Image.CopyToAsync(fileStream);
+                    }
+                }
+
+                GameImage gameImage = new GameImage()
+                {
+                    FileName = fileName,
+                    FileExtension = fileExtension,
+                    FilePath = folderPathServer,
+                    FileSize = fileSize
+                };
+
+                this.SaveImageData(postImageData.gameId, gameImage);
+
+                return folderPathServer;            
         
+        }
+
+        private void SaveImageData(int gameId, GameImage gameImage)
+        {
+             
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("gamesCatalogConection")))
+            {
+                SqlCommand command = new SqlCommand("Proc_Games_Images_Trans_Insert", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@Game_Id", gameId);
+                command.Parameters.AddWithValue("@File_Name", gameImage.FileName);
+                command.Parameters.AddWithValue("@File_Extension", gameImage.FileExtension);
+                command.Parameters.AddWithValue("@File_Path", gameImage.FilePath);
+                command.Parameters.AddWithValue("@File_Size", gameImage.FileSize);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+        }
+
+        private string GetFilePath(string parameterCode)
+        {
+            string serverPath = "";
+            using (SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("gamesCatalogConection")))
+            {
+                SqlCommand command = new SqlCommand("Proc_System_Parameter_Config_GetPaths", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@Parameter_Code", parameterCode);
+
+                connection.Open();
+                SqlDataReader datareader = command.ExecuteReader();
+                while (datareader.Read())
+                {
+                    serverPath = datareader["Parameter_Value"].ToString();
+                }
+                connection.Close();
+
+            }
+
+            return serverPath;
+        }
     }
 }

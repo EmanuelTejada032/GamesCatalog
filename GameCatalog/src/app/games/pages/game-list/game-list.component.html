@@ -16,7 +16,7 @@
                 <p class="card-text text-muted">By: {{game.studio}} <br>Released: {{game.releaseDate}}</p>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="btn btn-primary" [routerLink]="['/games/29']">{{game.id}}</a>
+                    <a class="btn btn-primary" routerLink="/games/{{game.id}}">{{game.title}}</a>
                 </div>
         </div>
     </div>
