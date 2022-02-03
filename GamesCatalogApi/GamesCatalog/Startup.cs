@@ -60,6 +60,7 @@ namespace GamesCatalog
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 

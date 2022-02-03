@@ -1,1 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+
+#previewrow{
+    width: 250px;
+    height: 200px;
+}

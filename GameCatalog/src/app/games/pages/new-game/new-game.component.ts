@@ -4,6 +4,7 @@ import { GamesService } from '../../services/games.service';
 import { SharedUtilitiesService } from '../../services/shared-utilities.service';
 import { GamePost, CatalogItem } from '../../interfaces/GamesInterfaces';
 import {Router} from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-new-game',
@@ -21,6 +22,9 @@ export class NewGameComponent implements OnInit {
   selectedTags: number[] = [];
   selectedLanguages: number[] = [];
 
+  files: any = [];
+  previewImage: string = "";
+
   newGameForm: FormGroup = this.formBuilder.group({
      title: ["", Validators.required],
      description: ["", Validators.required],
@@ -36,7 +40,8 @@ export class NewGameComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
               private gamesServices: GamesService,
               private sharedUtilitiesService:SharedUtilitiesService,
-              private router: Router) { }
+              private router: Router,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.loadCatalogs();
@@ -105,6 +110,40 @@ export class NewGameComponent implements OnInit {
     }
   }
 
+
+  captureFile(event: any){
+    const incomingFiles = event.target.files[0]; 
+    this.files.push(incomingFiles);
+    this.extract64Base(incomingFiles).then( (files:any) => {
+      console.log(files.base);
+      this.previewImage = files.base;
+    });
+    
+  }
+
+
+  extract64Base = async ($event: any) => new Promise((resolve, reject) => {
+    try {
+      const unsafeImg = window.URL.createObjectURL($event);
+      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      const reader = new FileReader();
+      reader.readAsDataURL($event);
+      reader.onload = () => {
+        resolve({
+          base: reader.result
+        });
+      };
+      reader.onerror = error => {
+        resolve({
+          base: null
+        });
+      };
+
+    } catch (e) {
+      return resolve(null);
+    }
+  })
+  
   
   loadCatalogs(){
     this.GetGameGenresCatalog();

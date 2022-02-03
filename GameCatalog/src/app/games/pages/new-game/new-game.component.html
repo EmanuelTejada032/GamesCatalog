@@ -11,12 +11,15 @@
             <div class="mb-3 row">
                 <label for="formFileMultiple" class="col-sm-3 col-form-label">Images</label>
                 <div class="col-sm-9">
-                    <input class="form-control" type="file" id="formFileMultiple" formControlName="images" multiple>
+                    <input class="form-control" type="file" id="formFileMultiple" formControlName="images" (change)="captureFile($event)">
                 </div>
-                <!-- <div class="col-sm-9">
-                    <input type="text" class="form-control mb-2" placeholder="Game image" formControlName="image"
-                        autocomplete="off">
-                </div> -->
+               
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Images preview</label>
+                <div class="col-sm-9 w-50" *ngIf="previewImage" id="previewrow">
+                    <img [src]="previewImage" alt="" id="previewrow">
+                </div>
             </div>
             <div class="mb-3 row">
                 <label for="" class="col-sm-3 col-form-label">Description</label>
