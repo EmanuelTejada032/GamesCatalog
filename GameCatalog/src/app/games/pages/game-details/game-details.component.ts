@@ -28,8 +28,6 @@ export class GameDetailsComponent implements OnInit {
   getGameById(){
     this.gameService.getGameById(this.gameId)
     .subscribe( game => {
-      console.log(game);
-      
       this.game = game;
     })
   }

@@ -172,9 +172,9 @@ namespace CORE.Services
                 gameId = Convert.ToInt32(command.ExecuteScalar());
                 connection.Close();
 
-                this.AddGameGenres(gameId, newGameData.Genres);
-                this.AddGameTags(gameId, newGameData.Tags);
-                this.AddGameLanguages( gameId,newGameData.Languages );
+                //this.AddGameGenres(gameId, newGameData.Genres);
+                //this.AddGameTags(gameId, newGameData.Tags);
+                //this.AddGameLanguages( gameId,newGameData.Languages );
 
             }
 

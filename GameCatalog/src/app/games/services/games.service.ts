@@ -16,7 +16,29 @@ export class GamesService {
   }
 
   gamePost(game: GamePost){
-    return this.http.post<GameCard[]>(APIURL.Games.gamePost, game);
+    const formData: FormData = new FormData();
+    formData.append('title', game.title);
+    formData.append('description', game.description);
+    formData.append('image', game.image);
+    formData.append('price', game.price.toString());
+    formData.append('studio', game.studio.toString());
+    formData.append('releaseDate', game.releasedate.toString());
+    formData.append('status', game.status.toString());
+    game.genres.forEach(( genre ) => {
+      formData.append("genres", genre.toString());
+    })
+    game.languages.forEach(( language ) => {
+      formData.append("languages", language.toString());
+    })
+    game.tags.forEach(( tag ) => {
+      formData.append("tags", tag.toString());
+    })
+    // formData.append('genres', JSON.stringify(game.genres));
+    // formData.append('languages', JSON.stringify(game.languages));
+    // formData.append('tags', JSON.stringify(game.tags));
+    formData.append('systemRequirements', game.systemRequirements);
+    
+    return this.http.post<any>(APIURL.Games.gamePost, formData);
   }
 
   getGameById(gameId: number){

@@ -13,7 +13,7 @@ export interface GameCard {
 
 export interface GamePost {
      title: string;
-     image: string;
+     image: File;
      description: string;
      price: number;
      studio: number;
@@ -23,6 +23,12 @@ export interface GamePost {
      tags: number[];
      status: number;
      systemRequirements: string;
+}
+
+export interface ImageFile {
+     name: string;
+     size: string;
+     type: string;
 }
 
 

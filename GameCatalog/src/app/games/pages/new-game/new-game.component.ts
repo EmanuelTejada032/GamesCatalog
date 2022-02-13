@@ -49,17 +49,14 @@ export class NewGameComponent implements OnInit {
 
 
   sendGameData(){
-    console.log(this.newGameForm.controls['images'].value);
-    
-    // const game: GamePost = this.formatFormData();
 
-    // this.resetNewGameForm();
-    // this.gamesServices.gamePost(game)
-    // .subscribe( postResponse => {
-    //   console.log("post response", postResponse);
-    //   this.resetNewGameForm();
-    //   this.router.navigateByUrl('/homepage');
-    // })
+    const game: GamePost = this.formatFormData();
+    this.gamesServices.gamePost(game)
+    .subscribe( postResponse => {
+      console.log("post response", postResponse);
+      this.resetNewGameForm();
+      this.router.navigateByUrl('/homepage');
+    })
   }
 
   onGenresCheckBoxChange(event: any){
@@ -102,8 +99,9 @@ export class NewGameComponent implements OnInit {
   formatFormData(){
     return {
       ...this.newGameForm.value,
-      status: 5,
-      studio: 1,
+      image: this.files[0] as File,
+      status: "5",
+      studio: "1",
       genres: this.selectedGenres ,
       languages: this.selectedLanguages ,
       tags: this.selectedTags 
@@ -115,10 +113,9 @@ export class NewGameComponent implements OnInit {
     const incomingFiles = event.target.files[0]; 
     this.files.push(incomingFiles);
     this.extract64Base(incomingFiles).then( (files:any) => {
-      console.log(files.base);
+      console.log(files);
       this.previewImage = files.base;
     });
-    
   }
 
 
@@ -130,11 +127,13 @@ export class NewGameComponent implements OnInit {
       reader.readAsDataURL($event);
       reader.onload = () => {
         resolve({
+          blob: $event,
           base: reader.result
         });
       };
       reader.onerror = error => {
         resolve({
+          blob: $event,
           base: null
         });
       };

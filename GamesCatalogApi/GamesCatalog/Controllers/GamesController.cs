@@ -35,8 +35,8 @@ namespace GamesCatalog.Controllers
             try
             {
                 var gameId = _gameService.RegisterGame(game);
-                string serverPath = await _gameService.UploadFrontPageImage(new PostGameImage {gameId= gameId, Image = game.Image }, _hostEnvironment.ContentRootPath);
-                await _impersonation.SaveFiles(game.Image,serverPath);
+                //string serverPath = await _gameService.UploadFrontPageImage(new PostGameImage {gameId= gameId, Image = game.Image }, _hostEnvironment.ContentRootPath);
+                //await _impersonation.SaveFiles(game.Image,serverPath);
                 return Ok(gameId);
 
             }

@@ -20,9 +20,9 @@ namespace CORE.Models
         public int? Studio { get; set; }
         public DateTime ReleaseDate { get; set; }
 
-        public List<int>? Genres { get; set; }
-        public List<int>? Languages { get; set; }
-        public List<int>? Tags { get; set; }
+        public ICollection<int>? Genres { get; set; }
+        public ICollection<int>? Languages { get; set; }
+        public ICollection<int>? Tags { get; set; }
         public int Status { get; set; }
         public string? SystemRequirements { get; set; }
 
